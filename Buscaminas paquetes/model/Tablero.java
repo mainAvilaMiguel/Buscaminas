@@ -13,12 +13,11 @@ public class Tablero {
 		this.numFilas = numFilas;
 		this.numColumnas = numColumnas;
 		this.numMinas = numMinas;
+		tablero = new Casilla[numFilas][numColumnas];
 		
 	}
 	public Tablero() {
-		tablero = new Casilla[numFilas][numColumnas];
-		numFilas=0;
-		numColumnas=0;
+
 	}
 	public Casilla obtenerCasilla(int fila, int columna) {
 		return tablero[fila][columna];

@@ -45,6 +45,7 @@ public class Presenter implements ActionListener{
 	public void reset() {
 		view.setDimensiones(new Dimension(buscaminas.getNumFilas(),buscaminas.getNumColumnas()));
 		view.reset(this);
+		new Tablero(buscaminas.getNumFilas(), buscaminas.getNumFilas(), buscaminas.getNumMinas());
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {

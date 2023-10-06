@@ -83,8 +83,9 @@ public class View extends JFrame{
 		this.add(panelTablero, BorderLayout.CENTER);
 	}
 	public void reset(ActionListener ac) {
-		this.remove(panelTablero);
-		crearPanelTablero(ac);
+		panelTablero.removeAll();
+		panelTablero.crearTableroBotones(ac,dimensiones);
+		panelTablero.updateUI();
 		this.repaint();
 	}
 //    public void mostrarContenido(Casilla casilla) {
