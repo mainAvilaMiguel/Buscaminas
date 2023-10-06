@@ -55,38 +55,53 @@ public class Tablero {
 			for (int j = 0; j <numColumnas ; j++) {
 				if (tablero[i][j].isBomba()){
 					mina++;
-					System.out.println("Fila: "+i+"  Columna: " + j + "  Numero mina: "+mina);
 				}
 			}
 		}
 	}
 	public void contarBombasCerca() {
-		for (int i = 0; i <numFilas-1; i++) {
-			for (int j = 0; j < numColumnas-1; j++) {
-				tablero[i][j].setNumero(verificarRadio(i,j));
-				if (i >= 0 && i < numFilas && j >= 0 && j < numColumnas) {
-					if(tablero[i][j].isBomba()) {
-
-					}
+		for (int i = 0; i <numFilas; i++) {
+			for (int j = 0; j < numColumnas; j++) {
+				if (!tablero[i][j].isBomba()){
+					tablero[i][j].setNumero(verificarRadio(i,j));
 				}
 			}
 		}
-
 	}
 
 	public int verificarRadio(int fila,int columna){
 		int catMinas =0;
 		if (fila==0 && columna==0){
-			catMinas = catMinas = verificarE(fila,columna)+verificarSE(fila,columna)+verificarS(fila,columna);
-		}else {
-
+			catMinas = verificarE(fila,columna)+verificarSE(fila,columna)+verificarS(fila,columna);
+		}else if (fila==(numFilas-1) && columna==0){
+			catMinas = verificarN(fila, columna)+verificarNE(fila, columna)+verificarE(fila, columna);
+		} else if (fila==0 && columna==(numColumnas-1)) {
+			catMinas = verificarS(fila, columna)+verificarSW(fila, columna)+verificarW(fila, columna);
+		} else if (fila==(numFilas-1)&&columna==(numColumnas-1)) {
+			catMinas = verificarN(fila, columna)+verificarNW(fila, columna)+verificarW(fila, columna);
+		} else if ((fila!=0 && fila<numFilas-1) && columna==0) {
+			catMinas = verificarN(fila, columna)+verificarNE(fila, columna)+verificarE(fila, columna)
+					+verificarSE(fila, columna)+verificarS(fila, columna);
+		} else if (fila==0 && (columna!=0 && columna<numColumnas-1)) {
+			catMinas = verificarS(fila, columna)+verificarSE(fila, columna)+verificarE(fila, columna)
+					+verificarSW(fila, columna)+verificarW(fila, columna);
+		} else if ((fila!=0 && fila<numFilas-1) && columna==numColumnas-1) {
+			catMinas = verificarN(fila, columna)+verificarS(fila, columna)+verificarSW(fila, columna)
+					+verificarW(fila, columna)+verificarNW(fila, columna);
+		} else if (fila==numFilas-1 && (columna!=0 && columna<numColumnas-1)) {
+			catMinas = verificarN(fila, columna)+verificarNE(fila, columna)+verificarE(fila, columna)
+					+verificarNW(fila, columna)+verificarW(fila, columna);
+		}else{
+			catMinas = verificarN(fila, columna)+verificarNE(fila, columna)+verificarE(fila, columna)
+					+verificarSE(fila, columna)+verificarS(fila, columna)+verificarSW(fila, columna)
+					+verificarW(fila, columna) +verificarNW(fila, columna);
 		}
 		return catMinas;
 	}
 
 	public int verificarN(int fila,int columna){
 		int counter=0;
-		if (tablero[fila+1][columna].isBomba()) {
+		if (tablero[fila-1][columna].isBomba()) {
 			counter++;
 		}
 		return counter;
@@ -94,14 +109,14 @@ public class Tablero {
 
 	public int verificarNE(int fila,int columna){
 		int counter=0;
-		if (tablero[fila+1][columna+1].isBomba()) {
+		if (tablero[fila-1][columna+1].isBomba()) {
 			counter++;
 		}
 		return counter;
 	}
 	public int verificarNW(int fila,int columna){
 		int counter=0;
-		if (tablero[fila+1][columna-1].isBomba()) {
+		if (tablero[fila-1][columna-1].isBomba()) {
 			counter++;
 		}
 		return counter;
@@ -109,7 +124,7 @@ public class Tablero {
 
 	public int verificarS(int fila,int columna){
 		int counter=0;
-		if (tablero[fila-1][columna].isBomba()) {
+		if (tablero[fila+1][columna].isBomba()) {
 			counter++;
 		}
 		return counter;
