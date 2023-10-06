@@ -84,20 +84,35 @@ public class Tablero {
 		return catMinas;
 	}
 
-	public int verificarN(){
-		return 0;
+	public int verificarN(int fila,int columna){
+		int counter=0;
+		if (tablero[fila+1][columna].isBomba()) {
+			counter++;
+		}
+		return counter;
 	}
 
-	public int verificarNE(){
-		return 0;
+	public int verificarNE(int fila,int columna){
+		int counter=0;
+		if (tablero[fila+1][columna+1].isBomba()) {
+			counter++;
+		}
+		return counter;
+	}
+	public int verificarNW(int fila,int columna){
+		int counter=0;
+		if (tablero[fila+1][columna-1].isBomba()) {
+			counter++;
+		}
+		return counter;
 	}
 
-	public int verificarNW(){
-		return 0;
-	}
-
-	public int verificarS(){
-		return 0;
+	public int verificarS(int fila,int columna){
+		int counter=0;
+		if (tablero[fila-1][columna].isBomba()) {
+			counter++;
+		}
+		return counter;
 	}
 
 	public int verificarSE(){
