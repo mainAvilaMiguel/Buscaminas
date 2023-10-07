@@ -17,8 +17,8 @@ public class Presenter implements ActionListener{
 
 	public Presenter() {
 		this.buscaminas = new Tablero(12,12,15);
-		buscaminas.crearTableroCasillas();
 		this.view= new View(this, new Dimension(buscaminas.getNumFilas(),buscaminas.getNumColumnas()));
+		reset();
 		
 	}
 	public void run() {
@@ -45,7 +45,8 @@ public class Presenter implements ActionListener{
 	public void reset() {
 		view.setDimensiones(new Dimension(buscaminas.getNumFilas(),buscaminas.getNumColumnas()));
 		view.reset(this);
-		new Tablero(buscaminas.getNumFilas(), buscaminas.getNumFilas(), buscaminas.getNumMinas());
+		this.buscaminas=new Tablero(buscaminas.getNumFilas(), buscaminas.getNumFilas(), buscaminas.getNumMinas());
+		buscaminas.crearTableroCasillas();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
