@@ -77,7 +77,7 @@ public class Tablero {
 	public int verificarRadio(int fila,int columna){
 		int catMinas =0;
 		if (fila==0 && columna==0){
-
+			catMinas = catMinas = verificarE(fila,columna)+verificarSE(fila,columna)+verificarS(fila,columna);
 		}else {
 
 		}
@@ -115,20 +115,36 @@ public class Tablero {
 		return counter;
 	}
 
-	public int verificarSE(){
-		return 0;
+	public int verificarSE(int fila,int columna){
+		int counter =0;
+		if (tablero[fila+1][columna+1].isBomba()){
+			counter++;
+		}
+		return counter;
 	}
 
-	public int verificarSW(){
-		return 0;
+	public int verificarSW(int fila,int columna){
+		int counter =0;
+		if (tablero[fila+1][columna-1].isBomba()){
+			counter++;
+		}
+		return counter;
 	}
 
-	public int verificarE(){
-		return 0;
+	public int verificarE(int fila,int columna){
+		int counter =0;
+		if (tablero[fila][columna+1].isBomba()){
+			counter++;
+		}
+		return counter;
 	}
 
-	public int verificarW(){
-		return 0;
+	public int verificarW(int fila,int columna){
+		int counter =0;
+		if (tablero[fila][columna-1].isBomba()){
+			counter++;
+		}
+		return counter;
 	}
 
 	public int getNumFilas() {
