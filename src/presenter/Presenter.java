@@ -81,9 +81,6 @@ public class Presenter implements ActionListener{
 //					
 //					}
 //				});
-//			}
-//		}
-
 
 	}
 
