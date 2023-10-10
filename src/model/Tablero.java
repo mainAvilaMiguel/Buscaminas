@@ -65,7 +65,6 @@ public class Tablero {
 			for (int j = 0; j < numColumnas; j++) {
 				if (!tablero[i][j].isBomba()){
 					tablero[i][j].setNumero(verificarRadio(i,j));
-					System.out.println(i+" "+j+" "+verificarRadio(i,j));
 				}
 			}
 		}
@@ -162,6 +161,10 @@ public class Tablero {
 			counter++;
 		}
 		return counter;
+	}
+
+	public void resetTablero(){
+        tablero = new Casilla[numFilas][numColumnas];
 	}
 
 	public int getNumFilas() {

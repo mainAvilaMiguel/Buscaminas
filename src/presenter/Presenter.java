@@ -45,7 +45,7 @@ public class Presenter implements ActionListener{
 	public void reset() {
 		view.setDimensiones(new Dimension(buscaminas.getNumFilas(),buscaminas.getNumColumnas()));
 		view.reset(this);
-		this.buscaminas=new Tablero(buscaminas.getNumFilas(), buscaminas.getNumFilas(), buscaminas.getNumMinas());
+		this.buscaminas.resetTablero();
 		buscaminas.crearTableroCasillas();
 	}
 	@Override
@@ -64,7 +64,8 @@ public class Presenter implements ActionListener{
 			reset();
 			break;			
 		default:
-			throw new IllegalArgumentException("Unexpected value: " + e.getActionCommand());
+			eventoBotones(e.getActionCommand().split(","));
+			//throw new IllegalArgumentException("Unexpected value: " + e.getActionCommand());
 		}
 		
 //		JButton [][] matBotones = view.getMatrizBotones();
@@ -82,6 +83,29 @@ public class Presenter implements ActionListener{
 //					}
 //				});
 
+	}
+
+	private void eventoBotones(String [] posicion){
+		int fila = Integer.parseInt(posicion[0]);
+		int columna = Integer.parseInt(posicion[1]);
+		Casilla aux =buscaminas.getTablero()[fila][columna];
+		view.eventoBotones(new String[]{posicionBotones(aux.getNumero(),fila,columna), String.valueOf(aux.getNumero())});
+	}
+
+	private String posicionBotones(int accion,int fila,int columna){
+		String aux = "";
+		if (accion>0){
+			if (fila==0){
+				aux = String.valueOf(columna);
+			}else{
+				aux = String.valueOf(((fila)*buscaminas.getNumColumnas())+columna);
+			}
+		} else if (accion<0) {
+
+		}else {
+
+		}
+		return aux;
 	}
 
 }	
