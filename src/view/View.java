@@ -88,6 +88,10 @@ public class View extends JFrame{
 		panelTablero.updateUI();
 		this.repaint();
 	}
+
+	public void eventoBotones(String[] info ){
+		panelTablero.eventoBotones(info);
+	}
 //    public void mostrarContenido(Casilla casilla) {
 //    	casilla=new Casilla();
 //        JLabel labelContenido= new JLabel();

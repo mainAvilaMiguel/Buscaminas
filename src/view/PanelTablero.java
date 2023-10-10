@@ -7,16 +7,17 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class PanelTablero extends JPanel{
-	private JButton[][] matrizBotones;
 	
 	public PanelTablero(ActionListener ac, Dimension dimensiones) {
 		this.inicializarComponentes(ac,dimensiones);
+	}
+	public void configuracion(Dimension dimensiones){
+		this.setLayout(new GridLayout(dimensiones.height,dimensiones.width,3,3));
 	}
 	public void inicializarComponentes(ActionListener ac, Dimension dimensiones) {
 		crearTableroBotones(ac,dimensiones);
 	}
 	public void crearTableroBotones(ActionListener ac,Dimension dimensiones) {
-		matrizBotones = new JButton[dimensiones.height][dimensiones.width];
 		this.setLayout(new GridLayout(dimensiones.height,dimensiones.width,2,2));
 		JButton boton;
 		for (int i = 0; i < dimensiones.height; i++) {
@@ -29,21 +30,29 @@ public class PanelTablero extends JPanel{
 				}else {
 					boton.setBackground(Color.GRAY);
 				}
+				boton.setActionCommand(i+","+j);
 				boton.addActionListener(ac);
-				matrizBotones[i][j]= boton;
-				this.add(matrizBotones[i][j]);
+				add(boton);
 			}
 		}
 	}
-	public JButton[][] getMatrizBotones() {
-		return matrizBotones;
+
+	public void eventoBotones(String [] info){
+		String [] posicionBotones = info[0].split("/");
+		System.out.println(posicionBotones[0] + "    Posicion");
+		int accion = Integer.parseInt(info[1]);
+		if (accion>0){
+			this.remove(Integer.parseInt(posicionBotones[0]));
+			add(new Label(String.valueOf(accion)),Integer.parseInt(posicionBotones[0]));
+			this.updateUI();
+		} else if (accion<0) {
+
+		}else {
+			for (int i = 0; i < posicionBotones.length-1; i++) {
+				this.remove(Integer.parseInt(posicionBotones[i]));
+			}
+		}
 	}
-	public void setMatrizBotones(JButton[][] matrizBotones) {
-		this.matrizBotones = matrizBotones;
-	}
-	public Dimension getDimensiones() {
-		int numFil = matrizBotones.length;
-		int numCol = numFil > 0 ? matrizBotones[0].length : 0;
-		return new Dimension(numFil, numCol);
-	}
+
+
 }
