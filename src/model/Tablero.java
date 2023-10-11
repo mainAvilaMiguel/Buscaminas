@@ -104,22 +104,183 @@ public class Tablero {
 		return catMinas;
 	}
 
-	public ArrayList<String> vaciosCercanos(ArrayList<String> verificacionVacios){
-		ArrayList<String> tmp = verificacionVacios;
-		Point aux = new Point();
+	public ArrayList<Point> vaciosCercanos(ArrayList<Point> verificacionVacios){
+		ArrayList<Point> tmp = verificacionVacios;
+		Point aux;
 		//Cuadre verificacion de radio
 		//Guiese de la verificacion de la sumatoria de radio
-		//aux = verificarVaciosE();
-		if ((aux.x!=-1) && (aux.y!=-1)){
-			tmp.add(((aux.x*numColumnas)+aux.y)+","+tablero[aux.x][aux.y].getNumero()+"/");
-		}
-		//aux = verificarVaciosSE();
-		if ((aux.x!=-1) && (aux.y!=-1)){
 
-		}
-		//aux = verificarVaciosS();
-		if ((aux.x!=-1) && (aux.y!=-1)){
-
+		for (Point p:tmp) {
+			if (p.x == 0 && p.y == 0) {
+				aux = verificarVaciosE(p.x, p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux = verificarVaciosSE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux = verificarVaciosS(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else if (p.x == (numFilas - 1) && p.y == 0) {
+				aux= verificarVaciosN(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosNE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else if (p.x == 0 && p.y == (numColumnas - 1)) {
+				aux= verificarVaciosW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosSW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosS(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else if (p.x == (numFilas - 1) && p.y == (numColumnas - 1)) {
+				aux= verificarVaciosN(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosNW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else if ((p.x != 0 && p.x < numFilas - 1) && p.y == 0) {
+				aux= verificarVaciosN(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosNE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosSE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosS(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else if (p.x == 0 && (p.y != 0 && p.y < (numColumnas - 1))) {
+				aux= verificarVaciosW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosSW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosS(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosSE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else if ((p.x != 0 && p.x < numFilas - 1) && p.y == numColumnas - 1) {
+				aux= verificarVaciosN(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosNW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosSW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosS(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else if (p.x == (numFilas - 1) && (p.y != 0 && p.y < numColumnas - 1)) {
+				aux= verificarVaciosN(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosNW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosNE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else {
+				aux= verificarVaciosN(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosNW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosSW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosS(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosSE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificarVaciosNE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			}
 		}
 		return tmp;
 	}
@@ -127,16 +288,17 @@ public class Tablero {
 	public String checkVacios(int fila, int columna){
 		String info = "";
 		int size;
-		ArrayList<String> aux = new ArrayList<>();
-		aux.add(((fila*numColumnas)+columna)+","+tablero[fila][columna].getNumero());
+		ArrayList<Point> aux = new ArrayList<>();
+		aux.add(new Point(fila,columna));
 		do{
 			size = aux.size();
 			aux = vaciosCercanos(aux);
 		}while (size!=aux.size());
-		for (Casilla tmp:aux) {
+	/*	for (Casilla tmp:aux) {
 			info += ","+tmp.getNumero()+"/";
-		}
-	}
+		}*/
+        return info;
+    }
 
 	private Point verificarVaciosN(int fila,int columna){
 		Point aux = new Point(-1,-1);
@@ -146,59 +308,58 @@ public class Tablero {
 		return aux;
 	}
 
-	private int verificarVaciosNE(int fila,int columna){
-		int counter=0;
+	private Point verificarVaciosNE(int fila,int columna){
+		Point aux = new Point(-1,-1);
 		if (tablero[fila-1][columna+1].isBomba()) {
-			counter++;
+			aux.setLocation(fila-1,columna+1);
 		}
-		return counter;
+		return aux;
 	}
-	private int verificarVaciosNW(int fila,int columna){
-		int counter=0;
-		if (tablero[fila-1][columna-1].isBomba()) {
-			counter++;
+	private Point verificarVaciosNW(int fila,int columna){
+		Point aux = new Point(-1,-1);
+		if (tablero[fila-1][columna-1].getNumero()==0) {
+			aux.setLocation(fila-1,columna-1);
 		}
-		return counter;
-	}
-
-	private int verificarVaciosS(int fila,int columna){
-		int counter=0;
-		if (tablero[fila+1][columna].isBomba()) {
-			counter++;
-		}
-		return counter;
+		return aux;
 	}
 
-	private int verificarVaciosSE(int fila,int columna){
-		int counter =0;
-		if (tablero[fila+1][columna+1].isBomba()){
-			counter++;
+	private Point verificarVaciosS(int fila,int columna){
+		Point aux = new Point(-1,-1);
+		if (tablero[fila+1][columna].getNumero()==0) {
+			aux.setLocation(fila+1,columna);
 		}
-		return counter;
+		return aux;
 	}
 
-	private int verificarVaciosSW(int fila,int columna){
-		int counter =0;
-		if (tablero[fila+1][columna-1].isBomba()){
-			counter++;
+	private Point verificarVaciosSE(int fila,int columna){
+		Point aux = new Point(-1,-1);
+		if (tablero[fila+1][columna+1].getNumero()==0) {
+			aux.setLocation(fila+1,columna+1);
 		}
-		return counter;
+		return aux;
+	}
+	private Point verificarVaciosSW(int fila,int columna){
+		Point aux = new Point(-1,-1);
+		if (tablero[fila+1][columna-1].getNumero()==0) {
+			aux.setLocation(fila+1,columna-1);
+		}
+		return aux;
 	}
 
-	private int verificarVaciosE(int fila,int columna){
-		int counter =0;
+	private Point verificarVaciosE(int fila,int columna){
+		Point aux = new Point(-1,-1);
 		if (tablero[fila][columna+1].isBomba()){
-			counter++;
+			aux.setLocation(fila,columna+1);
 		}
-		return counter;
+		return aux;
 	}
 
-	private int verificarVaciosW(int fila,int columna){
-		int counter =0;
+	private Point verificarVaciosW(int fila,int columna){
+		Point aux = new Point(-1,-1);
 		if (tablero[fila][columna-1].isBomba()){
-			counter++;
+			aux.setLocation(fila,columna-1);
 		}
-		return counter;
+		return aux;
 	}
 
 	private int verificarN(int fila,int columna){

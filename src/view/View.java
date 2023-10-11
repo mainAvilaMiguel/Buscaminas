@@ -39,11 +39,7 @@ public class View extends JFrame{
 	private JMenuItem nivelFacil;
 	private JMenuItem nivelMedio;
 	private JMenuItem nivelDificil;
-	
-//	public View(ActionListener ac, Dimension dimensiones) {
-//		this.configurarFrame();
-//		this.inicializarComponentes(ac);	
-//	}
+
 	public View(ActionListener ac, Dimension dimensiones) {
 		this.configurarFrame();
 		this.inicializarComponentes(ac);	
@@ -92,25 +88,10 @@ public class View extends JFrame{
 	public void eventoBotones(String[] info ){
 		panelTablero.eventoBotones(info);
 	}
-//    public void mostrarContenido(Casilla casilla) {
-//    	casilla=new Casilla();
-//        JLabel labelContenido= new JLabel();
-//        String contenido = casilla.getEtiqueta();
-//        labelContenido.setText(contenido);
-//	}
-//    public void seleccionDeNivel() {
-//    	JPopupMenu popMenu = new JPopupMenu();
-//    	this.getMenuNiveles();
-//    	popMenu.add(this.getNivelFacil());
-//    	popMenu.add(this.getNivelMedio());
-//    	popMenu.add(this.getNivelDificil());
-//    	mBar.add(this.getMenuNiveles());
-//    	setmBar(mBar);
-//    	menuNiveles.setVisible(true);
-//    }
 	public JMenuBar getmBar() {
 		return mBar;
 	}
+
 	public void setmBar(JMenuBar mBar) {
 		this.mBar = mBar;
 	}
@@ -145,8 +126,4 @@ public class View extends JFrame{
 	public void setDimensiones(Dimension dimensiones) {
 		this.dimensiones = dimensiones;
 	}
-	
-	
-	
-	
 }

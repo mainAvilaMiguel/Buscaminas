@@ -1,5 +1,7 @@
 package view;
 
+import model.Casilla;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -7,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class PanelTablero extends JPanel{
-	
+
 	public PanelTablero(ActionListener ac, Dimension dimensiones) {
 		this.inicializarComponentes(ac,dimensiones);
 	}
