@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -60,11 +62,13 @@ public class Tablero {
 			}
 		}
 	}
+
 	public void contarBombasCerca() {
 		for (int i = 0; i <numFilas; i++) {
 			for (int j = 0; j < numColumnas; j++) {
 				if (!tablero[i][j].isBomba()){
 					tablero[i][j].setNumero(verificarRadio(i,j));
+					System.out.println("Fila: "+i+ "   Columna: "+j+"    numero de minas:  "+ tablero[i][j].getNumero());
 				}
 			}
 		}
@@ -100,22 +104,56 @@ public class Tablero {
 		return catMinas;
 	}
 
-	public int verificarN(int fila,int columna){
-		int counter=0;
-		if (tablero[fila-1][columna].isBomba()) {
-			counter++;
+	public ArrayList<String> vaciosCercanos(ArrayList<String> verificacionVacios){
+		ArrayList<String> tmp = verificacionVacios;
+		Point aux = new Point();
+		//Cuadre verificacion de radio
+		//Guiese de la verificacion de la sumatoria de radio
+		//aux = verificarVaciosE();
+		if ((aux.x!=-1) && (aux.y!=-1)){
+			tmp.add(((aux.x*numColumnas)+aux.y)+","+tablero[aux.x][aux.y].getNumero()+"/");
 		}
-		return counter;
+		//aux = verificarVaciosSE();
+		if ((aux.x!=-1) && (aux.y!=-1)){
+
+		}
+		//aux = verificarVaciosS();
+		if ((aux.x!=-1) && (aux.y!=-1)){
+
+		}
+		return tmp;
 	}
 
-	public int verificarNE(int fila,int columna){
+	public String checkVacios(int fila, int columna){
+		String info = "";
+		int size;
+		ArrayList<String> aux = new ArrayList<>();
+		aux.add(((fila*numColumnas)+columna)+","+tablero[fila][columna].getNumero());
+		do{
+			size = aux.size();
+			aux = vaciosCercanos(aux);
+		}while (size!=aux.size());
+		for (Casilla tmp:aux) {
+			info += ","+tmp.getNumero()+"/";
+		}
+	}
+
+	private Point verificarVaciosN(int fila,int columna){
+		Point aux = new Point(-1,-1);
+		if (tablero[fila-1][columna].getNumero()==0) {
+			aux.setLocation(fila-1,columna);
+		}
+		return aux;
+	}
+
+	private int verificarVaciosNE(int fila,int columna){
 		int counter=0;
 		if (tablero[fila-1][columna+1].isBomba()) {
 			counter++;
 		}
 		return counter;
 	}
-	public int verificarNW(int fila,int columna){
+	private int verificarVaciosNW(int fila,int columna){
 		int counter=0;
 		if (tablero[fila-1][columna-1].isBomba()) {
 			counter++;
@@ -123,7 +161,7 @@ public class Tablero {
 		return counter;
 	}
 
-	public int verificarS(int fila,int columna){
+	private int verificarVaciosS(int fila,int columna){
 		int counter=0;
 		if (tablero[fila+1][columna].isBomba()) {
 			counter++;
@@ -131,7 +169,7 @@ public class Tablero {
 		return counter;
 	}
 
-	public int verificarSE(int fila,int columna){
+	private int verificarVaciosSE(int fila,int columna){
 		int counter =0;
 		if (tablero[fila+1][columna+1].isBomba()){
 			counter++;
@@ -139,7 +177,7 @@ public class Tablero {
 		return counter;
 	}
 
-	public int verificarSW(int fila,int columna){
+	private int verificarVaciosSW(int fila,int columna){
 		int counter =0;
 		if (tablero[fila+1][columna-1].isBomba()){
 			counter++;
@@ -147,7 +185,7 @@ public class Tablero {
 		return counter;
 	}
 
-	public int verificarE(int fila,int columna){
+	private int verificarVaciosE(int fila,int columna){
 		int counter =0;
 		if (tablero[fila][columna+1].isBomba()){
 			counter++;
@@ -155,7 +193,70 @@ public class Tablero {
 		return counter;
 	}
 
-	public int verificarW(int fila,int columna){
+	private int verificarVaciosW(int fila,int columna){
+		int counter =0;
+		if (tablero[fila][columna-1].isBomba()){
+			counter++;
+		}
+		return counter;
+	}
+
+	private int verificarN(int fila,int columna){
+		int counter=0;
+		if (tablero[fila-1][columna].isBomba()) {
+			counter++;
+		}
+		return counter;
+	}
+
+	private int verificarNE(int fila,int columna){
+		int counter=0;
+		if (tablero[fila-1][columna+1].isBomba()) {
+			counter++;
+		}
+		return counter;
+	}
+	private int verificarNW(int fila,int columna){
+		int counter=0;
+		if (tablero[fila-1][columna-1].isBomba()) {
+			counter++;
+		}
+		return counter;
+	}
+
+	private int verificarS(int fila,int columna){
+		int counter=0;
+		if (tablero[fila+1][columna].isBomba()) {
+			counter++;
+		}
+		return counter;
+	}
+
+	private int verificarSE(int fila,int columna){
+		int counter =0;
+		if (tablero[fila+1][columna+1].isBomba()){
+			counter++;
+		}
+		return counter;
+	}
+
+	private int verificarSW(int fila,int columna){
+		int counter =0;
+		if (tablero[fila+1][columna-1].isBomba()){
+			counter++;
+		}
+		return counter;
+	}
+
+	private int verificarE(int fila,int columna){
+		int counter =0;
+		if (tablero[fila][columna+1].isBomba()){
+			counter++;
+		}
+		return counter;
+	}
+
+	private int verificarW(int fila,int columna){
 		int counter =0;
 		if (tablero[fila][columna-1].isBomba()){
 			counter++;

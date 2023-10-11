@@ -89,22 +89,22 @@ public class Presenter implements ActionListener{
 		int fila = Integer.parseInt(posicion[0]);
 		int columna = Integer.parseInt(posicion[1]);
 		Casilla aux =buscaminas.getTablero()[fila][columna];
-		view.eventoBotones(new String[]{posicionBotones(aux.getNumero(),fila,columna), String.valueOf(aux.getNumero())});
+		aux.setEstado(true);
+		if(aux.isBomba()){
+			view.eventoBotones(new String[]{String.valueOf(-1).concat(","+(fila*buscaminas.getNumColumnas())+columna)});
+		}else{
+			view.eventoBotones(new String[]{posicionBotones(aux.getNumero(),fila,columna), String.valueOf(aux.getNumero())});
+		}
 	}
 
 	private String posicionBotones(int accion,int fila,int columna){
 		String aux = "";
 		if (accion>0){
-			if (fila==0){
-				aux = String.valueOf(columna);
-			}else{
-				aux = String.valueOf(((fila)*buscaminas.getNumColumnas())+columna);
-			}
-		} else if (accion<0) {
-
-		}else {
-
+				aux = String.valueOf(((fila)*buscaminas.getNumColumnas())+columna).concat(","+accion);
+		} else{
+				aux = buscaminas.checkVacios(fila,columna);
 		}
+
 		return aux;
 	}
 
