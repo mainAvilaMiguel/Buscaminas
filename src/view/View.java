@@ -13,6 +13,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
@@ -85,9 +86,14 @@ public class View extends JFrame{
 		this.repaint();
 	}
 
-	public void eventoBotones(String[] info ){
+	public void eventoBotones(ArrayList<String[]> info){
 		panelTablero.eventoBotones(info);
 	}
+
+	public void eventoBotones(String[] info){
+		panelTablero.eventoBotones(info);
+	}
+
 	public JMenuBar getmBar() {
 		return mBar;
 	}

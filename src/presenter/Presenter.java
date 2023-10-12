@@ -3,6 +3,7 @@ package presenter;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
@@ -90,27 +91,33 @@ public class Presenter implements ActionListener{
 		int fila = Integer.parseInt(posicion[0]);
 		int columna = Integer.parseInt(posicion[1]);
 		Casilla aux =buscaminas.getTablero()[fila][columna];
-		System.out.println("aux"+aux);
 		aux.setEstado(true);
 		if(aux.isBomba()){
-			System.out.println("bomba");
-			view.eventoBotones(new String[]{String.valueOf(-1).concat(","+(fila*buscaminas.getNumColumnas())+columna)});
+			view.eventoBotones(infoMinas());
 		}else{
-			System.out.println("No bomba");
-			view.eventoBotones(new String[]{posicionBotones(aux.getNumero(),fila,columna), String.valueOf(aux.getNumero())});
+			infoBotones(aux.getNumero(),fila,columna);
 		}
 	}
 
-	private String posicionBotones(int accion,int fila,int columna){
-		String aux = "";
+
+	private ArrayList<String[]> infoMinas(){
+		ArrayList<String[]> minas = new ArrayList<>();
+
+		return minas;
+	}
+
+
+
+	private void infoBotones(int accion,int fila,int columna){
+		String [] aux= new String[2];
 		System.out.println("los ptos botones");
 		if (accion>0){
-				aux = String.valueOf(((fila)*buscaminas.getNumColumnas())+columna).concat(","+accion);
+			aux[0] = String.valueOf(((fila)*buscaminas.getNumColumnas())+columna);
+			aux[1] = String.valueOf(accion);
+			view.eventoBotones(aux);
 		} else{
-				aux = buscaminas.checkVacios(fila,columna);
+				//Se envia ArrayList<String[]> que contiene la informadcion de los botones vacios
 		}
-
-		return aux;
 	}
 
 }	
