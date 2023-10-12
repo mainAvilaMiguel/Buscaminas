@@ -105,17 +105,16 @@ public class Tablero {
 	}
 	public boolean verificarPunto(ArrayList<Point> points,Point p){
 		boolean response = false;
-		if(points.equals(p)){
-			response=true;
+		for (Point point:points) {
+			if (points.equals(p)) {
+				response = true;
+			}
 		}
         return response;
     }
 	public ArrayList<Point> vaciosCercanos(ArrayList<Point> verificacionVacios){
 		ArrayList<Point> tmp = verificacionVacios;
 		Point aux;
-		//Cuadre verificacion de radio
-		//Guiese de la verificacion de la sumatoria de radio
-
 		for (Point p:tmp) {
 			if (p.x == 0 && p.y == 0) {
 					aux = verificarVaciosE(p.x, p.y);
@@ -296,16 +295,34 @@ public class Tablero {
 		int size;
 		ArrayList<Point> aux = new ArrayList<>();
 		aux.add(new Point(fila,columna));
+		System.out.println("llega a check?");
+
 		do{
 			size = aux.size();
-			aux = vaciosCercanos(aux);
+			System.out.println("entra al do?");
+			aux = vaciosCercanos((ArrayList<Point>) aux.clone());
+			System.out.println("pasa el aux?");
+
 		}while (size!=aux.size());
 	/*	for (Casilla tmp:aux) {
 			info += ","+tmp.getNumero()+"/";
 		}*/
         return info;
     }
-
+	public ArrayList<String[]> obtenerPosicionMinas() {
+		String coordenadas[]=new String[2];
+		ArrayList<String[]> infoMinas = new ArrayList<String[]>();
+		for (int i = 0; i < numFilas; i++) {
+			for (int j = 0; j < numColumnas; j++) {
+				if(tablero[i][j].isBomba()) {
+					coordenadas[0]=String.valueOf(i*numColumnas+j);
+					coordenadas[1]=String.valueOf(-1);
+					infoMinas.add(coordenadas);
+				}
+			}
+		}
+		return infoMinas;
+	}
 	private Point verificarVaciosN(int fila,int columna){
 		Point aux = new Point(-1,-1);
 		if (tablero[fila-1][columna].getNumero()==0) {

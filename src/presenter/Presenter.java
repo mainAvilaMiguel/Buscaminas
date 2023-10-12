@@ -96,6 +96,7 @@ public class Presenter implements ActionListener{
 			view.eventoBotones(infoMinas());
 		}else{
 			infoBotones(aux.getNumero(),fila,columna);
+			buscaminas.checkVacios(fila,columna);
 		}
 	}
 
