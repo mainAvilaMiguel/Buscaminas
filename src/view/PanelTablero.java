@@ -4,6 +4,7 @@ import model.Casilla;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -39,7 +40,26 @@ public class PanelTablero extends JPanel{
 		}
 	}
 
-	public void eventoBotones(String [] info){
+	public void eventoBotones(ArrayList<String[]> info){
+		int accion;
+		int posicion;
+		for (String[] tmp:info) {
+			posicion = Integer.parseInt(tmp[0]);
+			accion = Integer.parseInt(tmp[1]);
+			if (accion>0){
+				System.out.println("Chuta");
+				this.remove(posicion);
+				add(new Label(String.valueOf(accion)),posicion);
+				this.updateUI();
+			} else if (accion<0) {
+				System.out.println("Chuta X2");
+			}else {
+				this.remove(posicion);
+				this.updateUI();
+			}
+		}
+
+		/*
 		String [] posicionBotones = info[0].split("/");
 		System.out.println(posicionBotones[0] + "    Posicion");
 		int accion = Integer.parseInt(info[1]);
@@ -49,20 +69,15 @@ public class PanelTablero extends JPanel{
 		}else{
 			String[] posicion=posicionBotones[0].split(",");
 		}
-		if (accion>0){
-			System.out.println("Chuta");
-			this.remove(Integer.parseInt(posicionBotones[0]));
-			add(new Label(String.valueOf(accion)),Integer.parseInt(posicionBotones[0]));
-			this.updateUI();
-		} else if (accion<0) {
-			System.out.println("Chuta X2");
-		}else {
-			for (int i = 0; i < posicionBotones.length-1; i++) {
-				this.remove(Integer.parseInt(posicionBotones[i]));
-				System.out.println("Chuta X3");
-			}
-		}
+
+		 */
+
 	}
 
-
+	public void eventoBotones(String[] info) {
+		int posicion = Integer.parseInt(info[0]);
+		this.remove(posicion);
+		add(new Label(info[1]),posicion);
+		this.updateUI();
+	}
 }
