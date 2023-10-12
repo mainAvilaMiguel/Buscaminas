@@ -56,7 +56,7 @@ public class Tablero {
 		for (int i = 0; i < numFilas; i++) {
 			for (int j = 0; j <numColumnas ; j++) {
 				if (tablero[i][j].isBomba()){
-					System.out.println("Mina el la fila: "+i+" columna :"+j+" numero de mina: "+mina);
+				//	System.out.println("Mina el la fila: "+i+" columna :"+j+" numero de mina: "+mina);
 					mina++;
 				}
 			}
@@ -68,7 +68,7 @@ public class Tablero {
 			for (int j = 0; j < numColumnas; j++) {
 				if (!tablero[i][j].isBomba()){
 					tablero[i][j].setNumero(verificarRadio(i,j));
-					System.out.println("Fila: "+i+ "   Columna: "+j+"    numero de minas:  "+ tablero[i][j].getNumero());
+					//System.out.println("Fila: "+i+ "   Columna: "+j+"    numero de minas:  "+ tablero[i][j].getNumero());
 				}
 			}
 		}
@@ -103,7 +103,13 @@ public class Tablero {
 		}
 		return catMinas;
 	}
-
+	public boolean verificarPunto(ArrayList<Point> points,Point p){
+		boolean response = false;
+		if(points.equals(p)){
+			response=true;
+		}
+        return response;
+    }
 	public ArrayList<Point> vaciosCercanos(ArrayList<Point> verificacionVacios){
 		ArrayList<Point> tmp = verificacionVacios;
 		Point aux;
@@ -112,172 +118,172 @@ public class Tablero {
 
 		for (Point p:tmp) {
 			if (p.x == 0 && p.y == 0) {
-				aux = verificarVaciosE(p.x, p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
-					tmp.add(aux);
-				}
-				aux = verificarVaciosSE(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
-					tmp.add(aux);
-				}
-				aux = verificarVaciosS(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
-					tmp.add(aux);
-				}
+					aux = verificarVaciosE(p.x, p.y);
+					if ((aux.x != -1) && (aux.y != -1) && !verificarPunto(verificacionVacios,aux)) {
+							tmp.add(aux);
+					}
+					aux = verificarVaciosSE(p.x, p.y);
+					if ((aux.x != -1) && (aux.y != -1) && !verificarPunto(verificacionVacios,aux)) {
+						tmp.add(aux);
+					}
+					aux = verificarVaciosS(p.x, p.y);
+					if ((aux.x != -1) && (aux.y != -1) && !verificarPunto(verificacionVacios,aux)) {
+						tmp.add(aux);
+					}
 			} else if (p.x == (numFilas - 1) && p.y == 0) {
 				aux= verificarVaciosN(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosNE(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosE(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 			} else if (p.x == 0 && p.y == (numColumnas - 1)) {
 				aux= verificarVaciosW(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1) && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosSW(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosS(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 			} else if (p.x == (numFilas - 1) && p.y == (numColumnas - 1)) {
 				aux= verificarVaciosN(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosNW(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosW(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1) && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 			} else if ((p.x != 0 && p.x < numFilas - 1) && p.y == 0) {
 				aux= verificarVaciosN(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosNE(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosE(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosSE(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosS(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 			} else if (p.x == 0 && (p.y != 0 && p.y < (numColumnas - 1))) {
 				aux= verificarVaciosW(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1) && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosSW(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosS(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosSE(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosE(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 			} else if ((p.x != 0 && p.x < numFilas - 1) && p.y == numColumnas - 1) {
 				aux= verificarVaciosN(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosNW(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosW(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosSW(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosS(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 			} else if (p.x == (numFilas - 1) && (p.y != 0 && p.y < numColumnas - 1)) {
 				aux= verificarVaciosN(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosNW(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosW(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosE(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosNE(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1)  && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 			} else {
 				aux= verificarVaciosN(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1) && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosNW(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1) && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosW(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1) && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosSW(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1) && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosS(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1) && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosSE(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1) && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosE(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1) && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 				aux= verificarVaciosNE(p.x,p.y);
-				if ((aux.x != -1) && (aux.y != -1)) {
+				if ((aux.x != -1) && (aux.y != -1) && !verificarPunto(verificacionVacios,aux)) {
 					tmp.add(aux);
 				}
 			}

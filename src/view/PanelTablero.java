@@ -43,15 +43,23 @@ public class PanelTablero extends JPanel{
 		String [] posicionBotones = info[0].split("/");
 		System.out.println(posicionBotones[0] + "    Posicion");
 		int accion = Integer.parseInt(info[1]);
+		//lo ultimo agregado al evento, este if y su else
+		if(posicionBotones.length>1){
+			accion=Integer.parseInt(posicionBotones[1]);
+		}else{
+			String[] posicion=posicionBotones[0].split(",");
+		}
 		if (accion>0){
+			System.out.println("Chuta");
 			this.remove(Integer.parseInt(posicionBotones[0]));
 			add(new Label(String.valueOf(accion)),Integer.parseInt(posicionBotones[0]));
 			this.updateUI();
 		} else if (accion<0) {
-
+			System.out.println("Chuta X2");
 		}else {
 			for (int i = 0; i < posicionBotones.length-1; i++) {
 				this.remove(Integer.parseInt(posicionBotones[i]));
+				System.out.println("Chuta X3");
 			}
 		}
 	}

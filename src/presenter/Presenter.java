@@ -65,6 +65,7 @@ public class Presenter implements ActionListener{
 			break;			
 		default:
 			eventoBotones(e.getActionCommand().split(","));
+			System.out.println("llega a evento?");
 			//throw new IllegalArgumentException("Unexpected value: " + e.getActionCommand());
 		}
 		
@@ -89,16 +90,20 @@ public class Presenter implements ActionListener{
 		int fila = Integer.parseInt(posicion[0]);
 		int columna = Integer.parseInt(posicion[1]);
 		Casilla aux =buscaminas.getTablero()[fila][columna];
+		System.out.println("aux"+aux);
 		aux.setEstado(true);
 		if(aux.isBomba()){
+			System.out.println("bomba");
 			view.eventoBotones(new String[]{String.valueOf(-1).concat(","+(fila*buscaminas.getNumColumnas())+columna)});
 		}else{
+			System.out.println("No bomba");
 			view.eventoBotones(new String[]{posicionBotones(aux.getNumero(),fila,columna), String.valueOf(aux.getNumero())});
 		}
 	}
 
 	private String posicionBotones(int accion,int fila,int columna){
 		String aux = "";
+		System.out.println("los ptos botones");
 		if (accion>0){
 				aux = String.valueOf(((fila)*buscaminas.getNumColumnas())+columna).concat(","+accion);
 		} else{
