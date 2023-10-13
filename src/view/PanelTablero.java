@@ -6,12 +6,12 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class PanelTablero extends JPanel{
 
 	public PanelTablero(ActionListener ac, Dimension dimensiones) {
+		configuracion(dimensiones);
 		this.inicializarComponentes(ac,dimensiones);
 	}
 	public void configuracion(Dimension dimensiones){
@@ -21,7 +21,6 @@ public class PanelTablero extends JPanel{
 		crearTableroBotones(ac,dimensiones);
 	}
 	public void crearTableroBotones(ActionListener ac,Dimension dimensiones) {
-		this.setLayout(new GridLayout(dimensiones.height,dimensiones.width,2,2));
 		JButton boton;
 		for (int i = 0; i < dimensiones.height; i++) {
 			for (int j = 0; j < dimensiones.width; j++) {
@@ -44,17 +43,18 @@ public class PanelTablero extends JPanel{
 		int accion;
 		int posicion;
 		for (String[] tmp:info) {
+			System.out.println(info.size()   +"        tamano");
 			posicion = Integer.parseInt(tmp[0]);
 			accion = Integer.parseInt(tmp[1]);
-			if (accion>0){
-				System.out.println("Chuta");
+			if (accion==0) {
+				System.out.println("Remover: "+posicion);
+				System.out.println("Accion: "+accion);
+				add(new Label("V"),posicion);
 				this.remove(posicion);
-				add(new Label(String.valueOf(accion)),posicion);
 				this.updateUI();
-			} else if (accion<0) {
-				System.out.println("Chuta X2");
 			}else {
 				this.remove(posicion);
+				add(new Label("M"),posicion);
 				this.updateUI();
 			}
 		}

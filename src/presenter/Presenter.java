@@ -66,7 +66,6 @@ public class Presenter implements ActionListener{
 			break;			
 		default:
 			eventoBotones(e.getActionCommand().split(","));
-			System.out.println("llega a evento?");
 			//throw new IllegalArgumentException("Unexpected value: " + e.getActionCommand());
 		}
 		
@@ -95,29 +94,24 @@ public class Presenter implements ActionListener{
 		if(aux.isBomba()){
 			view.eventoBotones(infoMinas());
 		}else{
+			view.eventoBotones(buscaminas.checkVacios(fila,columna));
 			infoBotones(aux.getNumero(),fila,columna);
-			buscaminas.checkVacios(fila,columna);
 		}
 	}
 
 
 	private ArrayList<String[]> infoMinas(){
-		ArrayList<String[]> minas = new ArrayList<>();
-
-		return minas;
+		return buscaminas.obtenerPosicionMinas();
 	}
 
 
 
 	private void infoBotones(int accion,int fila,int columna){
 		String [] aux= new String[2];
-		System.out.println("los ptos botones");
 		if (accion>0){
 			aux[0] = String.valueOf(((fila)*buscaminas.getNumColumnas())+columna);
 			aux[1] = String.valueOf(accion);
 			view.eventoBotones(aux);
-		} else{
-				//Se envia ArrayList<String[]> que contiene la informadcion de los botones vacios
 		}
 	}
 
