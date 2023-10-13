@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 public class PanelTablero extends JPanel{
 
@@ -50,7 +51,7 @@ public class PanelTablero extends JPanel{
 			if (accion==0) {
 				System.out.println("Remover: "+posicion);
 				System.out.println("Accion: "+accion);
-				add(new Label("V"),posicion);
+				add(new JLabel("V"),posicion);
 				this.remove(posicion);
 				this.updateUI();
 			}else {
