@@ -15,19 +15,8 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JColorChooser;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import model.Casilla;
@@ -79,6 +68,7 @@ public class View extends JFrame{
 		panelTablero = new PanelTablero(ac, dimensiones);
 		this.add(panelTablero, BorderLayout.CENTER);
 	}
+
 	public void reset(ActionListener ac) {
 		panelTablero.removeAll();
 		panelTablero.crearTableroBotones(ac,dimensiones);

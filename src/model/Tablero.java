@@ -56,7 +56,7 @@ public class Tablero {
 		for (int i = 0; i < numFilas; i++) {
 			for (int j = 0; j <numColumnas ; j++) {
 				if (tablero[i][j].isBomba()){
-				//	System.out.println("Mina el la fila: "+i+" columna :"+j+" numero de mina: "+mina);
+				System.out.println("Mina el la fila: "+i+" columna :"+j+" numero de mina: "+mina);
 					mina++;
 				}
 			}
@@ -68,7 +68,7 @@ public class Tablero {
 			for (int j = 0; j < numColumnas; j++) {
 				if (!tablero[i][j].isBomba()){
 					tablero[i][j].setNumero(verificarRadio(i,j));
-					//System.out.println("Fila: "+i+ "   Columna: "+j+"    numero de minas:  "+ tablero[i][j].getNumero());
+					System.out.println("Fila: "+i+ "   Columna: "+j+"    numero de minas:  "+ tablero[i][j].getNumero());
 				}
 			}
 		}
@@ -113,7 +113,7 @@ public class Tablero {
         return response;
     }
 	public ArrayList<Point> vaciosCercanos(ArrayList<Point> verificacionVacios){
-		ArrayList<Point> tmp = new ArrayList<>();
+		ArrayList<Point> tmp = (ArrayList<Point>) verificacionVacios.clone();
 		Point aux;
 		for (Point p:verificacionVacios) {
 			if (p.x == 0 && p.y == 0) {
@@ -292,7 +292,7 @@ public class Tablero {
 
 	public ArrayList<String[]> checkVacios(int fila, int columna){
 		ArrayList<String[]> info = new ArrayList<>();
-		String posicion;
+		int posicion;
 		int size;
 		ArrayList<Point> aux = new ArrayList<>();
 		aux.add(new Point(fila,columna));
@@ -301,9 +301,9 @@ public class Tablero {
 			aux = vaciosCercanos(aux);
 		}while (size!=aux.size());
 		for (Point p:aux) {
-			posicion = String.valueOf(p.x*numColumnas)+p.y;
-			System.out.println("M: "+posicion);
-			info.add(new String[]{String.valueOf(p.x*numColumnas)+p.y,String.valueOf(0)});
+			posicion = (p.x*numColumnas)+p.y;
+			System.out.println("M: "+p);
+			info.add(new String[]{String.valueOf(posicion),String.valueOf(0)});
 		}
         return info;
     }
