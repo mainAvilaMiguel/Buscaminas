@@ -103,15 +103,7 @@ public class Tablero {
 		}
 		return catMinas;
 	}
-	public boolean verificarPunto(ArrayList<Point> points,Point p){
-		boolean response = false;
-		for (Point point:points) {
-			if (points.equals(p)) {
-				response = true;
-			}
-		}
-        return response;
-    }
+
 	public ArrayList<Point> vaciosCercanos(ArrayList<Point> verificacionVacios){
 		ArrayList<Point> tmp = (ArrayList<Point>) verificacionVacios.clone();
 		Point aux;
@@ -301,12 +293,17 @@ public class Tablero {
 			aux = vaciosCercanos(aux);
 		}while (size!=aux.size());
 		for (Point p:aux) {
-			posicion = (p.x*numColumnas)+p.y;
-			System.out.println("M: "+p);
+			posicion = posicionBoton(p.x,p.y);
 			info.add(new String[]{String.valueOf(posicion),String.valueOf(0)});
 		}
+
         return info;
     }
+
+	private int posicionBoton(int fila,int columna){
+		int aux = fila*numColumnas;
+		return aux+columna;
+	}
 	public ArrayList<String[]> obtenerPosicionMinas() {
 		ArrayList<String[]> infoMinas = new ArrayList<String[]>();
 		for (int i = 0; i < numFilas; i++) {
