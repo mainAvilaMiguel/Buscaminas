@@ -21,6 +21,7 @@ public class PanelTablero extends JPanel{
 		crearTableroBotones(ac,dimensiones);
 	}
 	public void crearTableroBotones(ActionListener ac,Dimension dimensiones) {
+		this.setLayout(new GridLayout(dimensiones.height,dimensiones.width,3,3));
 		JButton boton;
 		for (int i = 0; i < dimensiones.height; i++) {
 			for (int j = 0; j < dimensiones.width; j++) {
@@ -54,7 +55,9 @@ public class PanelTablero extends JPanel{
 				this.updateUI();
 			}else {
 				this.remove(posicion);
-				add(new Label("M"),posicion);
+				JLabel mina = new JLabel("Mina");
+				mina.setBackground(Color.red);
+				add(mina,posicion);
 				this.updateUI();
 			}
 		}
