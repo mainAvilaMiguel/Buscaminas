@@ -11,8 +11,10 @@ import javax.swing.border.Border;
 
 public class PanelTablero extends JPanel{
 
+	Dimension dimension;
+
 	public PanelTablero(ActionListener ac, Dimension dimensiones) {
-		configuracion(dimensiones);
+		this.dimension = dimensiones;
 		this.inicializarComponentes(ac,dimensiones);
 	}
 	public void configuracion(Dimension dimensiones){
@@ -22,6 +24,7 @@ public class PanelTablero extends JPanel{
 		crearTableroBotones(ac,dimensiones);
 	}
 	public void crearTableroBotones(ActionListener ac,Dimension dimensiones) {
+		this.dimension = dimensiones;
 		this.setLayout(new GridLayout(dimensiones.height,dimensiones.width,3,3));
 		JButton boton;
 		for (int i = 0; i < dimensiones.height; i++) {
@@ -79,7 +82,7 @@ public class PanelTablero extends JPanel{
 	}
 
 	private void perdio(){
-		for (int i = 0; i < 143; i++) {
+		for (int i = 0; i < (dimension.height*dimension.width)-1; i++) {
 			this.getComponent(i).setEnabled(false);
 		}
 	}

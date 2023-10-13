@@ -56,7 +56,6 @@ public class Tablero {
 		for (int i = 0; i < numFilas; i++) {
 			for (int j = 0; j <numColumnas ; j++) {
 				if (tablero[i][j].isBomba()){
-				System.out.println("Mina el la fila: "+i+" columna :"+j+" numero de mina: "+mina);
 					mina++;
 				}
 			}
@@ -68,7 +67,6 @@ public class Tablero {
 			for (int j = 0; j < numColumnas; j++) {
 				if (!tablero[i][j].isBomba()){
 					tablero[i][j].setNumero(verificarRadio(i,j));
-					System.out.println("Fila: "+i+ "   Columna: "+j+"    numero de minas:  "+ tablero[i][j].getNumero());
 				}
 			}
 		}
