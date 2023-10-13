@@ -44,24 +44,24 @@ public class PanelTablero extends JPanel{
 	public void eventoBotones(ArrayList<String[]> info){
 		int accion;
 		int posicion;
+		JButton tmp2;
 		for (String[] tmp:info) {
-			System.out.println(info.size()   +"        tamano");
 			posicion = Integer.parseInt(tmp[0]);
 			accion = Integer.parseInt(tmp[1]);
 			if (accion==0) {
-				System.out.println("Remover: "+posicion);
-				System.out.println("Accion: "+accion);
-				add(new JLabel("V"),posicion);
-				this.remove(posicion);
+				tmp2 = (JButton) this.getComponent(posicion);
+				tmp2.setEnabled(false);
+				tmp2.setBackground(Color.WHITE);
 				this.updateUI();
 			}else {
-				this.remove(posicion);
-				JLabel mina = new JLabel("Mina");
-				mina.setBackground(Color.red);
-				add(mina,posicion);
+				tmp2 = (JButton) this.getComponent(posicion);
+				tmp2.setEnabled(false);
+				tmp2.setBackground(Color.red);
+				perdio();
 				this.updateUI();
 			}
 		}
+
 
 		/*
 		String [] posicionBotones = info[0].split("/");
@@ -78,10 +78,18 @@ public class PanelTablero extends JPanel{
 
 	}
 
+	private void perdio(){
+		for (int i = 0; i < 143; i++) {
+			this.getComponent(i).setEnabled(false);
+		}
+	}
+
 	public void eventoBotones(String[] info) {
 		int posicion = Integer.parseInt(info[0]);
 		this.remove(posicion);
-		add(new Label(info[1]),posicion);
+		JLabel tmp = new JLabel(info[1]);
+		tmp.setBackground(Color.WHITE);
+		add(tmp,posicion);
 		this.updateUI();
 	}
 }

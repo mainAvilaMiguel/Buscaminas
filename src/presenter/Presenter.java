@@ -94,7 +94,6 @@ public class Presenter implements ActionListener{
 		if(aux.isBomba()){
 			view.eventoBotones(infoMinas());
 		}else{
-			view.eventoBotones(buscaminas.checkVacios(fila,columna));
 			infoBotones(aux.getNumero(),fila,columna);
 		}
 	}
@@ -112,6 +111,8 @@ public class Presenter implements ActionListener{
 			aux[0] = String.valueOf(((fila)*buscaminas.getNumColumnas())+columna);
 			aux[1] = String.valueOf(accion);
 			view.eventoBotones(aux);
+		}else{
+			view.eventoBotones(buscaminas.checkVacios(fila,columna));
 		}
 	}
 
