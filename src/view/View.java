@@ -21,7 +21,7 @@ import javax.swing.border.EmptyBorder;
 
 import model.Casilla;
 import presenter.Presenter;
-public class View extends JFrame{
+public class View extends JFrame implements IView{
 	private PanelTablero panelTablero;
 	public Dimension dimensiones;
 	private JMenuBar mBar;
@@ -34,6 +34,7 @@ public class View extends JFrame{
 		this.configurarFrame();
 		this.inicializarComponentes(ac);	
 	}
+	@Override
 	public void inicializarComponentes(ActionListener ac) {
 		mBar = new JMenuBar();
 		menuNiveles = new JMenu("Niveles");
@@ -48,6 +49,7 @@ public class View extends JFrame{
 		this.crearPanelTablero(ac);
 		this.setVisible(true);
 	}
+	@Override
 	public void configurarFrame() {
 		this.setTitle("Buscaminas");
 		this.setSize(500,700);
@@ -57,6 +59,7 @@ public class View extends JFrame{
 		this.setLocationRelativeTo(null);
 	
 	}
+	@Override
 	public void agregarAMenuNiveles() {
 		menuNiveles.add(nivelFacil);
 		menuNiveles.add(nivelMedio);
@@ -64,22 +67,23 @@ public class View extends JFrame{
 		mBar.add(menuNiveles);
 		this.add(mBar, BorderLayout.NORTH);
 	}
+	@Override
 	public void crearPanelTablero(ActionListener ac) {
 		panelTablero = new PanelTablero(ac, dimensiones);
 		this.add(panelTablero, BorderLayout.CENTER);
 	}
-
+	@Override
 	public void reset(ActionListener ac) {
 		panelTablero.removeAll();
 		panelTablero.crearTableroBotones(ac,dimensiones);
 		panelTablero.updateUI();
 		this.repaint();
 	}
-
+	@Override
 	public void eventoBotones(ArrayList<String[]> info){
 		panelTablero.eventoBotones(info);
 	}
-
+	@Override
 	public void eventoBotones(String[] info){
 		panelTablero.eventoBotones(info);
 	}

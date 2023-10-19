@@ -45,6 +45,7 @@ public class PanelTablero extends JPanel{
 		int accion;
 		int posicion;
 		JButton tmp2;
+		JLabel aux;
 		for (String[] tmp:info) {
 			posicion = Integer.parseInt(tmp[0]);
 			accion = Integer.parseInt(tmp[1]);
@@ -53,11 +54,17 @@ public class PanelTablero extends JPanel{
 				tmp2.setEnabled(false);
 				tmp2.setBackground(Color.WHITE);
 				this.updateUI();
-			}else {
+			}else if (accion<0){
 				tmp2 = (JButton) this.getComponent(posicion);
 				tmp2.setEnabled(false);
 				tmp2.setBackground(Color.red);
 				perdio();
+				this.updateUI();
+			}else{
+				this.remove(posicion);
+				aux = new JLabel(tmp[1]);
+				aux.setBackground(Color.WHITE);
+				add(aux,posicion);
 				this.updateUI();
 			}
 		}

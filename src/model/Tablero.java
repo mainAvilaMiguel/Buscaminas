@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-public class Tablero {
+public class Tablero implements  ITablero{
 	private int numFilas;
 	private int numColumnas;
 	private Casilla[][]tablero;
@@ -20,11 +20,7 @@ public class Tablero {
 	public Tablero() {
 
 	}
-	public Casilla obtenerCasilla(int fila, int columna) {
-		return tablero[fila][columna];
-		
-	}
-
+	@Override
 	public void crearTableroCasillas() {
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[0].length; j++) {
@@ -34,7 +30,7 @@ public class Tablero {
 		this.asignarMinas();
 	}
 
-
+	@Override
 	public void asignarMinas() {
 		Random rand = new Random();
 		int minasLocalizadas=0;
@@ -51,29 +47,28 @@ public class Tablero {
 		imprimirCasillas();
 		contarBombasCerca();
 	}
+	@Override
 	public void imprimirCasillas(){
 		int mina=0;
 		for (int i = 0; i < numFilas; i++) {
 			for (int j = 0; j <numColumnas ; j++) {
 				if (tablero[i][j].isBomba()){
-				System.out.println("Mina el la fila: "+i+" columna :"+j+" numero de mina: "+mina);
 					mina++;
 				}
 			}
 		}
 	}
-
+	@Override
 	public void contarBombasCerca() {
 		for (int i = 0; i <numFilas; i++) {
 			for (int j = 0; j < numColumnas; j++) {
 				if (!tablero[i][j].isBomba()){
 					tablero[i][j].setNumero(verificarRadio(i,j));
-					System.out.println("Fila: "+i+ "   Columna: "+j+"    numero de minas:  "+ tablero[i][j].getNumero());
 				}
 			}
 		}
 	}
-
+@Override
 	public int verificarRadio(int fila,int columna){
 		int catMinas =0;
 		if (fila==0 && columna==0){
@@ -103,7 +98,7 @@ public class Tablero {
 		}
 		return catMinas;
 	}
-
+@Override
 	public ArrayList<Point> vaciosCercanos(ArrayList<Point> verificacionVacios){
 		ArrayList<Point> tmp = (ArrayList<Point>) verificacionVacios.clone();
 		Point aux;
@@ -281,7 +276,185 @@ public class Tablero {
 		}
 		return tmp;
 	}
-
+	@Override
+	public ArrayList<Point> numerosCercaAVaciosCercanos(ArrayList<Point> verificacionVacios){
+		ArrayList<Point> tmp = (ArrayList<Point>) verificacionVacios.clone();
+		Point aux;
+		for (Point p:verificacionVacios) {
+			if (p.x == 0 && p.y == 0) {
+				aux = verificacionNumerosCercaAVaciosE(p.x, p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux = verificacionNumerosCercaAVaciosSE(p.x, p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux = verificacionNumerosCercaAVaciosS(p.x, p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else if (p.x == (numFilas - 1) && p.y == 0) {
+				aux= verificacionNumerosCercaAVaciosN(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosNE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else if (p.x == 0 && p.y == (numColumnas - 1)) {
+				aux= verificacionNumerosCercaAVaciosW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosSW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosS(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else if (p.x == (numFilas - 1) && p.y == (numColumnas - 1)) {
+				aux= verificacionNumerosCercaAVaciosN(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosNW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else if ((p.x != 0 && p.x < numFilas - 1) && p.y == 0) {
+				aux= verificacionNumerosCercaAVaciosN(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosNE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosSE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosS(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else if (p.x == 0 && (p.y != 0 && p.y < (numColumnas - 1))) {
+				aux= verificacionNumerosCercaAVaciosW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosSW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosS(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosSE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else if ((p.x != 0 && p.x < numFilas - 1) && p.y == numColumnas - 1) {
+				aux= verificacionNumerosCercaAVaciosN(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosNW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosSW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosS(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else if (p.x == (numFilas - 1) && (p.y != 0 && p.y < numColumnas - 1)) {
+				aux= verificacionNumerosCercaAVaciosN(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosNW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosNE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			} else {
+				aux= verificacionNumerosCercaAVaciosN(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosNW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosSW(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosS(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosSE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+				aux= verificacionNumerosCercaAVaciosNE(p.x,p.y);
+				if ((aux.x != -1) && (aux.y != -1)) {
+					tmp.add(aux);
+				}
+			}
+		}
+		return tmp;
+	}
+	@Override
 	public ArrayList<String[]> checkVacios(int fila, int columna){
 		ArrayList<String[]> info = new ArrayList<>();
 		int posicion;
@@ -292,9 +465,13 @@ public class Tablero {
 			size = aux.size();
 			aux = vaciosCercanos(aux);
 		}while (size!=aux.size());
+		System.out.println("tamaño antes "+aux.size());
+		aux = numerosCercaAVaciosCercanos((aux));
+		System.out.println("tamaño despues "+aux.size());
 		for (Point p:aux) {
 			posicion = posicionBoton(p.x,p.y);
-			info.add(new String[]{String.valueOf(posicion),String.valueOf(0)});
+			System.out.println("El tablero \n"+tablero[p.x][p.y].getNumero());
+			info.add(new String[]{String.valueOf(posicion),String.valueOf(tablero[p.x][p.y].getNumero())});
 		}
 
         return info;
@@ -304,6 +481,7 @@ public class Tablero {
 		int aux = fila*numColumnas;
 		return aux+columna;
 	}
+	@Override
 	public ArrayList<String[]> obtenerPosicionMinas() {
 		ArrayList<String[]> infoMinas = new ArrayList<String[]>();
 		for (int i = 0; i < numFilas; i++) {
@@ -315,14 +493,6 @@ public class Tablero {
 		}
 
 		return infoMinas;
-	}
-	private Point verificarVaciosN(int fila,int columna){
-		Point aux = new Point(-1,-1);
-		if ((tablero[fila-1][columna].getNumero()==0)&&(!tablero[fila-1][columna].isEstado())) {
-			aux.setLocation(fila-1,columna);
-			tablero[fila-1][columna].setEstado(true);
-		}
-		return aux;
 	}
 
 	private Point verificarVaciosNE(int fila,int columna){
@@ -380,6 +550,84 @@ public class Tablero {
 	private Point verificarVaciosW(int fila,int columna){
 		Point aux = new Point(-1,-1);
 		if ((tablero[fila][columna-1].getNumero()==0)&&(!tablero[fila][columna-1].isEstado())){
+			aux.setLocation(fila,columna-1);
+			tablero[fila][columna-1].setEstado(true);
+		}
+		return aux;
+	}
+
+
+	private Point verificarVaciosN(int fila,int columna){
+		Point aux = new Point(-1,-1);
+		if ((tablero[fila-1][columna].getNumero()==0)&&(!tablero[fila-1][columna].isEstado())) {
+			aux.setLocation(fila-1,columna);
+			tablero[fila-1][columna].setEstado(true);
+		}
+		return aux;
+	}
+	private Point verificacionNumerosCercaAVaciosN(int fila,int columna){
+		Point aux = new Point(-1,-1);
+		if ((tablero[fila-1][columna+1].getNumero()!=0)&&(!tablero[fila-1][columna+1].isEstado())) {
+			aux.setLocation(fila-1,columna+1);
+			tablero[fila-1][columna+1].setEstado(true);
+		}
+		return aux;
+	}
+	private Point verificacionNumerosCercaAVaciosNE(int fila,int columna){
+		Point aux = new Point(-1,-1);
+		if((tablero[fila-1][columna+1].getNumero()!=0)&&(!tablero[fila-1][columna+1].isEstado())) {
+			aux.setLocation(fila-1,columna+1);
+			tablero[fila-1][columna+1].setEstado(true);
+		}
+		return aux;
+	}
+	private Point verificacionNumerosCercaAVaciosNW(int fila,int columna){
+		Point aux = new Point(-1,-1);
+		if ((tablero[fila-1][columna-1].getNumero()!=0)&&(!tablero[fila-1][columna-1].isEstado())) {
+			aux.setLocation(fila-1,columna-1);
+			tablero[fila-1][columna-1].setEstado(true);
+		}
+		return aux;
+	}
+
+	private Point verificacionNumerosCercaAVaciosS(int fila,int columna){
+		Point aux = new Point(-1,-1);
+		if ((tablero[fila+1][columna].getNumero()!=0)&&(!tablero[fila+1][columna].isEstado())) {
+			aux.setLocation(fila+1,columna);
+			tablero[fila+1][columna].setEstado(true);
+		}
+		return aux;
+	}
+
+	private Point verificacionNumerosCercaAVaciosSE(int fila,int columna){
+		Point aux = new Point(-1,-1);
+		if((tablero[fila+1][columna+1].getNumero()!=0)&&(!tablero[fila+1][columna+1].isEstado())) {
+			aux.setLocation(fila+1,columna+1);
+			tablero[fila+1][columna+1].setEstado(true);;
+		}
+		return aux;
+	}
+	private Point verificacionNumerosCercaAVaciosSW(int fila,int columna){
+		Point aux = new Point(-1,-1);
+		if ((tablero[fila+1][columna-1].getNumero()!=0)&&(!tablero[fila+1][columna-1].isEstado())) {
+			aux.setLocation(fila+1,columna-1);
+			tablero[fila+1][columna-1].setEstado(true);
+		}
+		return aux;
+	}
+
+	private Point verificacionNumerosCercaAVaciosE(int fila,int columna){
+		Point aux = new Point(-1,-1);
+		if ((tablero[fila][columna+1].getNumero()!=0)&&(!tablero[fila][columna+1].isEstado())){
+			aux.setLocation(fila,columna+1);
+			tablero[fila][columna+1].setEstado(true);
+		}
+		return aux;
+	}
+
+	private Point verificacionNumerosCercaAVaciosW(int fila,int columna){
+		Point aux = new Point(-1,-1);
+		if ((tablero[fila][columna-1].getNumero()!=0)&&(!tablero[fila][columna-1].isEstado())){
 			aux.setLocation(fila,columna-1);
 			tablero[fila][columna-1].setEstado(true);
 		}
@@ -448,7 +696,7 @@ public class Tablero {
 		}
 		return counter;
 	}
-
+@Override
 	public void resetTablero(){
         tablero = new Casilla[numFilas][numColumnas];
 	}
