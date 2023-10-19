@@ -725,7 +725,4 @@ public class Tablero implements  ITablero{
 	public void setNumMinas(int numMinas) {
 		this.numMinas = numMinas;
 	}
-	
-	
-	
 }
